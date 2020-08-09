@@ -1,0 +1,17 @@
+header {
+    text-align: center;
+}
+
+
+table {
+    background-color: black;
+    height: 500px;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+td {
+    border-style: solid;
+    border-color: white;
+    border-radius: 50%;
+}
