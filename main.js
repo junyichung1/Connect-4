@@ -1,8 +1,10 @@
 /*----- constants -----*/
 const PLAYERS = {
-  player1: 1,
-  player2: -1,
+  "1": 'red',
+  "-1": 'yellow'
 };
+
+
 
 const MAXGUESS = 42;
 // const WINCOMBOS = ??
@@ -13,7 +15,7 @@ let winner;
 let board;
 
 /*----- cached element references -----*/
-const rowEl = document.querySelectorAll("tr");
+const allSquareEl = document.querySelectorAll("td");
 const messageEl = document.getElementById("msg");
 
 /*----- event listeners -----*/
@@ -24,16 +26,18 @@ document.querySelector("table").addEventListener("click", handleDrop);
 init();
 
 function handleDrop(evt) {
-  let colIdx = evt.target.className.replace("c", "");
+  let colIdx = parseInt(evt.target.className.replace("c", ""));
   for (let i = 0; i < 6; i++) {
     if (board[colIdx][i] === null) {
       board[colIdx][i] = turn;
+      
+      turn *= -1;
       return;
     }
-    turn *= -1;
+    
     // input where to put in array of array
   }
-  render(evt.target);
+  render(colIdx);
   //     // need to update board in this function
   //   //   checkWinner();
 }
@@ -56,25 +60,29 @@ function init() {
 
 function render(elem) {
   //   change color of board
-  let row = [];
-  let colIdx = elem.className.replace("c", "");
-  for (let i = 5; i > -1; i--) {
-    if (rowEl[i].children[colIdx].style.backgroundColor === "black") {
-        row.push(rowEl[i].children[colIdx])
-        if (turn >0) {
-            row[0].style.backgroundColor = "red";
-        } else {
-            row[0].style.backgroundColor = "yellow";
-        }
-    //   rowEl[i].children[colIdx].style.backgroundColor =
+
+  // let row = [];
+  // let colIdx = elem.className.replace("c", "");
+    // for (let i = 0; i < 5; i++) {
+    //   if (allSquareEl[elem][i].style.backgroundColor === "black") {
+    //   elem.style.backgroundColor =
     //     turn > 0 ? "red" : "yellow";
+
+  //       row.push(rowEl[i].children[colIdx])
+  //       if (turn >0) {
+  //           row[0].style.backgroundColor = "red";
+  //       } else {
+  //           row[0].style.backgroundColor = "yellow";
+  //       }
+
+      
       
     }
-  }
-}
+
+// }
 
 // function renderMsg() {}
 
 // function getWinner() {
 
-// }
+
