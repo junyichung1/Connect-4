@@ -1,18 +1,28 @@
-header {
-    text-align: center;
+main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
-
+header {
+  text-align: center;
+}
 
 table {
-    background-color: blue;
-    height: 500px;
-    width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+  background-color: blue;
+  height: 500px;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 td {
-    border-style: solid;
-    border-color: white;
-    border-radius: 50%;
-    background-color: black;
+  border-style: solid;
+  border-color: white;
+  border-radius: 50%;
+}
+
+button {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }

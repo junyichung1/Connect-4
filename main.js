@@ -2,7 +2,7 @@
 const PLAYERS = {
   "1": "red",
   "-1": "yellow",
-  null: "black"
+  null: "black",
 };
 
 const MAXGUESS = 42;
@@ -19,31 +19,38 @@ const messageEl = document.getElementById("msg");
 
 /*----- event listeners -----*/
 document.querySelector("table").addEventListener("click", handleDrop);
-// document.querySelector("button").addEventListener("click", renderMsg);
+document.querySelector("button").addEventListener("click", init);
 
 /*----- functions -----*/
 init();
 
 function handleDrop(evt) {
+  // indexof
   let colIdx = parseInt(evt.target.className.replace("c", ""));
-  for (let i = 0; i < 6; i++) {
-    if (board[colIdx][i] === null) {
-      board[colIdx][i] = turn;
-      
-      turn *= -1;
-      console.log(evt.target)
-      render();
-      return;
-    }
+  if (isNaN(colIdx)) return;
+  let rowIdx = board[colIdx].indexOf(null);
+  if (rowIdx === -1) {
+    return;
+  } else {
+    board[colIdx][rowIdx] = turn;
+  }
+  // for (let i = 0; i < 6; i++) {
+  //   if (board[colIdx][i] === null) {
+  //     board[colIdx][i] = turn;
+  if (
+    checkHorizontal() ||
+    checkVertical() ||
+    checkDiagonalDown() ||
+    checkDiagonalUp() ||
+    checkTie()
+  ) {
+    renderMsg();
+  } else {
+    turn *= -1;
+    render();
+    return;
   }
 }
-
-// input where to put in array of array
-
-//   render(evt.target);
-//   //     // need to update board in this function
-//   //   //   checkWinner();
-// }
 
 function init() {
   // reset all variables
@@ -59,22 +66,105 @@ function init() {
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
   ];
-
+  messageEl.textContent = null;
+  render();
 }
-
-
-
 
 function render() {
   board.forEach((arr, col) => {
     arr.forEach((cell, row) => {
-      document.getElementById(`c${col}-${row}`).style.backgroundColor = PLAYERS[cell]
-  }) 
-})
+      document.getElementById(`c${col}-${row}`).style.backgroundColor =
+        PLAYERS[cell];
+    });
+  });
 }
 
+function renderMsg() {
+  if (turn === 1) {
+    return (messageEl.textContent = `${PLAYERS["1"]} team wins!`);
+  } else if (turn === -1) {
+    return (messageEl.textContent = `${PLAYERS["-1"]} team wins!`);
+  } else {
+    return (messageEl.textContent = `This game ended in a tie...`);
+  }
+}
 
+function absValue(a, b, c, d) {
+  let abs = a + b + c + d;
+  if (Math.abs(abs) === 4) return true;
+}
 
-// function renderMsg() {}
+function checkVertical() {
+  for (let col = 0; col < 7; col++) {
+    for (let row = 0; row < 3; row++) {
+      if (
+        absValue(
+          board[col][row],
+          board[col][row + 1],
+          board[col][row + 2],
+          board[col][row + 3]
+        )
+      ) {
+        return true;
+        console.log(checkVertical());
+      }
+    }
+  }
+}
 
-// function getWinner() {}
+function checkHorizontal() {
+  for (let col = 0; col < 4; col++) {
+    for (let row = 0; row < 6; row++) {
+      if (
+        absValue(
+          board[col][row],
+          board[col + 1][row],
+          board[col + 2][row],
+          board[col + 3][row]
+        )
+      ) {
+        return true;
+      }
+    }
+  }
+}
+
+function checkDiagonalUp() {
+  for (let col = 0; col < 4; col++) {
+    for (let row = 0; row < 2; row++) {
+      if (
+        absValue(
+          board[col][row],
+          board[col + 1][row + 1],
+          board[col + 2][row + 2],
+          board[col + 3][row + 3]
+        )
+      ) {
+        return true;
+      }
+    }
+  }
+}
+
+function checkDiagonalDown() {
+  for (let col = 0; col < 4; col++) {
+    for (let row = 5; row > 2; row--) {
+      if (
+        absValue(
+          board[col][row],
+          board[col + 1][row - 1],
+          board[col + 2][row - 2],
+          board[col + 3][row - 3]
+        )
+      ) {
+        return true;
+      }
+    }
+  }
+}
+
+// why does this return undefined
+function checkTie() {
+  return !board.some((arr) => arr.includes(null));
+}
+// use .some that includes  not a null and not a winner
