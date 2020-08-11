@@ -1,10 +1,9 @@
 /*----- constants -----*/
 const PLAYERS = {
-  "1": 'red',
-  "-1": 'yellow'
+  "1": "red",
+  "-1": "yellow",
+  null: "black"
 };
-
-
 
 const MAXGUESS = 42;
 // const WINCOMBOS = ??
@@ -32,15 +31,19 @@ function handleDrop(evt) {
       board[colIdx][i] = turn;
       
       turn *= -1;
+      console.log(evt.target)
+      render();
       return;
     }
-    
-    // input where to put in array of array
   }
-  render(colIdx);
-  //     // need to update board in this function
-  //   //   checkWinner();
 }
+
+// input where to put in array of array
+
+//   render(evt.target);
+//   //     // need to update board in this function
+//   //   //   checkWinner();
+// }
 
 function init() {
   // reset all variables
@@ -56,33 +59,22 @@ function init() {
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
   ];
+
 }
 
-function render(elem) {
-  //   change color of board
 
-  // let row = [];
-  // let colIdx = elem.className.replace("c", "");
-    // for (let i = 0; i < 5; i++) {
-    //   if (allSquareEl[elem][i].style.backgroundColor === "black") {
-    //   elem.style.backgroundColor =
-    //     turn > 0 ? "red" : "yellow";
 
-  //       row.push(rowEl[i].children[colIdx])
-  //       if (turn >0) {
-  //           row[0].style.backgroundColor = "red";
-  //       } else {
-  //           row[0].style.backgroundColor = "yellow";
-  //       }
 
-      
-      
-    }
+function render() {
+  board.forEach((arr, col) => {
+    arr.forEach((cell, row) => {
+      document.getElementById(`c${col}-${row}`).style.backgroundColor = PLAYERS[cell]
+  }) 
+})
+}
 
-// }
+
 
 // function renderMsg() {}
 
-// function getWinner() {
-
-
+// function getWinner() {}
