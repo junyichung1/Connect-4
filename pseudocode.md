@@ -5,6 +5,9 @@ Description: User needs to connect 4 dots in a row to win
 Screenshot WireFrame:
 
 https://i.imgur.com/K66c6ly.png
+https://i.imgur.com/gntgsPs.png
+
+link of deployed game
 
 Technologies Used: JavaScript, HTML, CSS
 
@@ -85,3 +88,5 @@ Class=”r5”
 Think about maybe using the class with .replace(“r”, “”) to access index number as well for child array
 
 Also, dont forget the parseInt()
+
+for future: I may include a win counter, audio

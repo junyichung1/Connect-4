@@ -23,7 +23,6 @@ document.querySelector("button").addEventListener("click", init);
 init();
 
 function handleDrop(evt) {
-  // indexof
   let colIdx = parseInt(evt.target.className.replace("c", ""));
   if (isNaN(colIdx)) return;
   let rowIdx = board[colIdx].indexOf(null);
@@ -32,9 +31,7 @@ function handleDrop(evt) {
   } else {
     board[colIdx][rowIdx] = turn;
   }
-  // for (let i = 0; i < 6; i++) {
-  //   if (board[colIdx][i] === null) {
-  //     board[colIdx][i] = turn;
+  
   if (checkHorizontal() || checkVertical() || checkDiagonalDown() || checkDiagonalUp()
   ) {
     renderMsg();
@@ -48,10 +45,8 @@ function handleDrop(evt) {
 }
 
 function init() {
-  // reset all variables
   turn = 1;
   winner = null;
-  // each array inside the array is a column
   board = [
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
@@ -162,8 +157,7 @@ function checkDiagonalDown() {
   }
 }
 
-// why does this return undefined
 function checkTie() {
   return !board.some((arr) => arr.includes(null));
 }
-// use .some that includes  not a null and not a winner
+
