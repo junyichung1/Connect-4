@@ -5,8 +5,6 @@ const PLAYERS = {
   null: "black",
 };
 
-const MAXGUESS = 42;
-// const WINCOMBOS = ??
 
 /*----- app's state (variables) -----*/
 let turn;
@@ -37,14 +35,11 @@ function handleDrop(evt) {
   // for (let i = 0; i < 6; i++) {
   //   if (board[colIdx][i] === null) {
   //     board[colIdx][i] = turn;
-  if (
-    checkHorizontal() ||
-    checkVertical() ||
-    checkDiagonalDown() ||
-    checkDiagonalUp() ||
-    checkTie()
+  if (checkHorizontal() || checkVertical() || checkDiagonalDown() || checkDiagonalUp()
   ) {
     renderMsg();
+  } else if (checkTie()) {
+    renderTieMsg();
   } else {
     turn *= -1;
     render();
@@ -75,18 +70,22 @@ function render() {
     arr.forEach((cell, row) => {
       document.getElementById(`c${col}-${row}`).style.backgroundColor =
         PLAYERS[cell];
+
     });
   });
+  messageEl.textContent = `Team ${PLAYERS[turn]}'s turn`
 }
 
 function renderMsg() {
   if (turn === 1) {
-    return (messageEl.textContent = `${PLAYERS["1"]} team wins!`);
-  } else if (turn === -1) {
-    return (messageEl.textContent = `${PLAYERS["-1"]} team wins!`);
+    return (messageEl.textContent = `Team ${PLAYERS["1"]} wins!`);
   } else {
-    return (messageEl.textContent = `This game ended in a tie...`);
-  }
+    return (messageEl.textContent = `Team ${PLAYERS["-1"]} wins!`);
+  } 
+}
+
+function renderTieMsg() {
+  return (messageEl.textContent = `This game ended in a tie...`);
 }
 
 function absValue(a, b, c, d) {

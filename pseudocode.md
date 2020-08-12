@@ -2,17 +2,55 @@ Title: Connect 4
 
 Description: User needs to connect 4 dots in a row to win
 
-Screenshot WireFrame: (create screenshot of how game will look with winner in it)
+Screenshot WireFrame:
 
 https://i.imgur.com/K66c6ly.png
 
 Technologies Used: JavaScript, HTML, CSS
 
-Pseudocode:
-const = MAXGUESS(42)
-const = WinningCombos (look up how to create constant)
+-- Detailed pseudocode--
 
-variable= playerChoice array
+const = object PLAYERS
+
+variable=
+board
+turn
+winner
+
+cached element references:
+the message
+the whole table
+
+event listeners:
+reset button
+drop coin
+(both on 'click')
+
+functions
+
+initialize()
+reset all variables
+board all null
+turn set to 1
+winner null
+invoke render
+
+handleDrop()
+change turns
+obtain index of swuare
+update states
+loop of where coin should land
+check if there is a winner
+update the board
+
+render()
+coin(empty div inside td) changes color-for loop(if null, change color to red or yellow)
+update message (check winner-> you won!, check tie, or leave as is)
+
+getWinner()
+research on win logic. 4 separate functions: checkhorizontal, checkvertical, diagonaldown, diagonalup
+
+--basic pseudocode--
 
 Display the game (6x7 grid in css) red and yellow circles
 2 players
@@ -26,23 +64,16 @@ once there is a winner return winning message or tie if no more moves left
 check winning combos
 play again game button
 
-relational position on winning combo. also think about edge cases.
-look up array.some()
-
-Bonus: get piece to show it going down and sideways
-
-[Image of the box with IDs](https://i.imgur.com/weNQpzV.png)
+[Image of the box with IDs] https://i.imgur.com/L4aJdOE.png
 
 Array [
-Column 1 [35,28,21,14,7,0]
-Column 2 [36,29,22,15,8,1]
-Column 3 [37,30,23,16,9,2]
-Column 4 [38,31,24,17,10,3]
-Column 5 [39,32,25,18,11,4]
-Column 6 [40,33,26,19,12,5]
-Column 7 [41,34,27,20,13,6]
-
-**chose this array arrangement because when I console.log(the whole table) that is the order of the array it spits back out.
+Column 1 [c0-0,c0-1,c0-2,c0-3,c0-4,c0-5]
+Column 2 [c1-0,c1-1,c1-2,c1-3,c1-4,c1-5]
+Column 3 [c2-0,c2-1,c2-2,c2-3,c2-4,c2-5]
+Column 4 [c3-0,c3-1,c3-2,c3-3,c3-4,c3-5]
+Column 5 [c4-0,c4-1,c4-2,c4-3,c4-4,c4-5]
+Column 6 [c5-0,c5-1,c5-2,c5-3,c5-4,c5-5]
+Column 7 [c6-0,c6-1,c6-2,c6-3,c6-4,c6-5]
 
 Class=”r0”
 Class=”r1”
@@ -50,8 +81,6 @@ Class=”r2”
 Class=”r3”
 Class=”r4”
 Class=”r5”
-
-Use evt.target.id.substr(3, 3) to access index number inside the parent array
 
 Think about maybe using the class with .replace(“r”, “”) to access index number as well for child array
 
