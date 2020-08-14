@@ -10,7 +10,7 @@ Screenshot WireFrame:
 <a href="https://imgur.com/gntgsPs"><img src="https://i.imgur.com/gntgsPs.png" title="source: imgur.com" /></a>
 <a href="https://imgur.com/187GdhI"><img src="https://i.imgur.com/187GdhI.png" title="source: imgur.com" /></a>
 
-link of deployed game
+
 
 Technologies Used: JavaScript, HTML, CSS, imgur, google, youtube, zoom
 
